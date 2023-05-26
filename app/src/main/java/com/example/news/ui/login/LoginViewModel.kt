@@ -11,13 +11,18 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel() {
     private val _loginResponse = MutableStateFlow<Boolean>(false)
-    val loginResponse : StateFlow<Boolean> = _loginResponse
-    var error : String =""
-    private set
+    val loginResponse: StateFlow<Boolean> = _loginResponse
+    private val _loading = MutableStateFlow<Boolean>(false)
+    val loading = _loading
+    var error: String = ""
+        private set
 
     fun login(email: String, password: String) {
 
         viewModelScope.launch {
+            loading.value = true
+            var result = authRepo.login(email, password)
+            loading.value = false
             if (authRepo.login(email, password))
                 _loginResponse.value = true
             else {

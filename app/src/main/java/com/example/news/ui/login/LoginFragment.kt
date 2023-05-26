@@ -29,11 +29,35 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var email = binding.emailInputLogin.text.toString()
-        var password = binding.passwordInputLogin.text.toString()
+        val email = binding.emailInputLogin.text.toString()
+        val password = binding.passwordInputLogin.text.toString()
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         lifecycleScope.launch {
-            loginViewModel.loginResponse.collect { it ->
+            loginViewModel.loading.collect {
+                when (it) {
+                    true -> {
+                        Toast.makeText(
+                            context,
+                            "Loading",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                    else -> {
+                        Toast.makeText(
+                            context,
+                            "Loading is Stopped",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
+            }
+
+
+        }
+        lifecycleScope.launch {
+            loginViewModel.loginResponse.collect {
                 when (it) {
                     false -> {
                         Toast.makeText(
@@ -54,9 +78,7 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
-
         }
-
         binding.btnLogin.setOnClickListener {
             loginViewModel.login(email, password)
 
