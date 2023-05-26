@@ -1,4 +1,4 @@
-package com.workshop.news
+package com.example.news
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
