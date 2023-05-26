@@ -1,4 +1,4 @@
-package com.example.news.data.repo
+package com.example.news.data.repo.auth
 
 import com.example.news.data.local.preferences.LocalUser
 import com.example.news.data.local.preferences.PreferencesData
@@ -6,6 +6,10 @@ import com.example.news.data.local.preferences.UserManager
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
 
 import com.example.news.data.remote.datasource.AuthRemoteDataSourceImp
+import com.example.news.domin.model.SignUpForm
+import com.example.news.domin.model.SignUpResult
+import com.example.news.domin.model.signUpResult
+import com.example.news.domin.model.toAuthRequst
 import com.example.news.data.remote.datasource.mapRemoteUserToUser
 import com.example.news.domin.model.User
 
@@ -29,12 +33,12 @@ class AuthRepoImp(
         }
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String) : Boolean{
+    override suspend fun signUP(signUpForm: SignUpForm): Result<SignUpResult>{
         return try {
-            authRemoteDataSource.signUP(email, userName, password)
-            true
+            val result =  authRemoteDataSource.signUP(signUpForm.toAuthRequst())
+            return Result.success(result.signUpResult())
         }catch (e: Exception){
-            false
+            Result.failure(Exception(e.message))
         }
     }
 
