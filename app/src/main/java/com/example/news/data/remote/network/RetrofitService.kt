@@ -12,6 +12,6 @@ import retrofit2.http.Query
 
 private const val KEY = BuildConfig.API_KEY
 interface RetrofitService {
-    @POST("/accounts:signInWithPassword")
+    @POST("/accounts:signUp")
     suspend fun signUp(@Body signupRequest: SignupRequest, @Query("key") key : String = KEY) : SignupResponse
 }
