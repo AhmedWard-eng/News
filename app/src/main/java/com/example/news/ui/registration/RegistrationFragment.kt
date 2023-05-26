@@ -11,8 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.news.R
-import com.example.news.data.repo.AuthRepo
-import com.example.news.data.repo.AuthRepoImp
+import com.example.news.data.repo.auth.AuthRepo
+import com.example.news.data.repo.auth.AuthRepoImp
+
 import com.example.news.databinding.RegistrationUiBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

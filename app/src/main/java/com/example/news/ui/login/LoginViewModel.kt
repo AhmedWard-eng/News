@@ -3,8 +3,9 @@ package com.example.news.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.data.repo.AuthRepo
-import com.example.news.data.repo.AuthRepoImp
+
+import com.example.news.data.repo.auth.AuthRepo
+import com.example.news.data.repo.auth.AuthRepoImp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

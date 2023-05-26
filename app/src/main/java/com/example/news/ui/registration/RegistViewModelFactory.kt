@@ -2,7 +2,7 @@ package com.example.news.ui.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.news.data.repo.AuthRepo
+import com.example.news.data.repo.auth.AuthRepo
 
 class RegistViewModelFactory (private val repo: AuthRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

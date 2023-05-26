@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.data.repo.AuthRepo
+import com.example.news.data.repo.auth.AuthRepo
 import com.example.news.domin.model.SignUpForm
 import com.example.news.domin.model.SignUpResult
 import kotlinx.coroutines.flow.MutableStateFlow
