@@ -1,11 +1,9 @@
 package com.example.news.data.remote.datasource
 
-import com.example.news.data.remote.entity.AuthResponse
-import com.example.news.domin.model.User
+import com.example.news.data.remote.entity.SignupResponse
 
 interface AuthRemoteDataSource {
     suspend fun login(email:String,password:String) : RemoteUser?
-    suspend fun signUP(email: String,userName:String,password: String) : AuthResponse
-    suspend fun logout() : Boolean
+    suspend fun signUP(email: String,userName:String,password: String) : SignupResponse
 
 }
