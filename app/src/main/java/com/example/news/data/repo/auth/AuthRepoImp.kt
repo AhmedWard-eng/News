@@ -23,12 +23,12 @@ class AuthRepoImp(
         return false
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String) : Boolean{
+    override suspend fun signUP(email: String, userName: String, password: String) : Result<Boolean>{
         return try {
             authRemoteDataSource.signUP(email, userName, password)
-            true
+            Result.success(true)
         }catch (e: Exception){
-            false
+            Result.failure(Exception(e.message))
         }
     }
 
