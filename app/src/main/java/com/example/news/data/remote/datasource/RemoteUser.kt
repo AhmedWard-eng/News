@@ -1,14 +1,14 @@
 package com.example.news.data.remote.datasource
 
+import com.example.news.data.remote.entity.ErrorBody
 import com.example.news.domin.model.User
-import java.lang.Error
 
 data class RemoteUser(
     val userId: String?,
     val userName: String?,
     val email: String?,
     val token: Boolean?,
-    val error : Error?
+    val error : ErrorBody?
 )
 
 fun RemoteUser.mapRemoteUserToUser(): User {
