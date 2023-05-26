@@ -6,7 +6,7 @@ import com.example.news.data.remote.network.RetrofitAPI
 import com.example.news.data.remote.network.RetrofitService
 
 class AuthRemoteDataSourceImp(private val retrofitService: RetrofitService = RetrofitAPI.apiService): AuthRemoteDataSource {
-    override suspend fun login(email: String, password: String) {
+    override suspend fun login(email: String, password: String): RemoteUser? {
         TODO("Not yet implemented")
     }
 
