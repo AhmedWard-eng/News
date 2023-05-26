@@ -25,14 +25,14 @@ class PreferencesData(private val sharedPreferences: SharedPreferences = SharedP
         val userId =  sharedPreferences.getString(userId,"")
         val name = sharedPreferences.getString(name,"")
         val email = sharedPreferences.getString(email,"")
-        if(userId != null && name != null && email != null){
-            return Result.success(LocalUser(
+        return if(userId != null && name != null && email != null){
+            Result.success(LocalUser(
                 userId = userId,
                 name = name,
                 email = email
             ))
         }else{
-            return Result.failure(Exception("User not Found"))
+            Result.failure(Exception("User not Found"))
         }
 
     }
