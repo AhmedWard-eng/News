@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/down_guideline"
@@ -131,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -157,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/don_t_have_account"
-                android:textSize="18sp"></TextView>
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtSignUp"
@@ -168,7 +169,7 @@
                 android:gravity="center"
                 android:text="@string/signup"
                 android:textColor="@color/primary_color"
-                android:textSize="18sp"></TextView>
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
