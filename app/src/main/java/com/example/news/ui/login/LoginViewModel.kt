@@ -3,8 +3,9 @@ package com.example.news.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.data.repo.AuthRepo
-import com.example.news.data.repo.AuthRepoImp
+
+import com.example.news.data.repo.auth.AuthRepo
+import com.example.news.data.repo.auth.AuthRepoImp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,7 +24,7 @@ class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel
             loading.value = true
             var result = authRepo.login(email, password)
             loading.value = false
-            if (authRepo.login(email, password))
+            if (result.isSuccess)
                 _loginResponse.value = true
             else {
                 _loginResponse.value = false

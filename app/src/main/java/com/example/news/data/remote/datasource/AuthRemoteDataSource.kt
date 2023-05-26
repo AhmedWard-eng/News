@@ -5,9 +5,9 @@ import com.example.news.data.remote.entity.SignupRequest
 
 
 interface AuthRemoteDataSource {
-    suspend fun login(email:String,password:String) : RemoteUser?
     suspend fun signUP(authRequest: SignupRequest) : SignupResponse
 
     fun isUserAuth() : Boolean
+    suspend fun login(email:String,password:String) : Result<RemoteUser>
 
 }

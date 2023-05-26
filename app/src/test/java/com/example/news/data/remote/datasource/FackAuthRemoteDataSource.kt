@@ -1,6 +1,7 @@
 package com.example.news.data.remote.datasource
 
-import com.example.news.data.remote.entity.AuthRequest
+import com.example.news.data.remote.entity.SignupRequest
+import com.example.news.data.remote.entity.SignupResponse
 
 class FackAuthRemoteDataSource : AuthRemoteDataSource {
 
@@ -17,19 +18,12 @@ class FackAuthRemoteDataSource : AuthRemoteDataSource {
         }
     }
 
-    override suspend fun signUP(authRequest: AuthRequest): Boolean {
-        this.email = email
-        this.userName = userName
-        this.password = password
-        return  true
+    override suspend fun signUP(authRequest: SignupRequest) : SignupResponse {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun logout(): Boolean {
-        this.email = ""
-        this.password = ""
-        this.userName = ""
-        this.id = ""
-
-        return true
+    override fun isUserAuth(): Boolean {
+        TODO("Not yet implemented")
     }
+
 }

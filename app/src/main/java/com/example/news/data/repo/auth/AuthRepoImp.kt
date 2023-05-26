@@ -10,21 +10,27 @@ import com.example.news.domin.model.SignUpForm
 import com.example.news.domin.model.SignUpResult
 import com.example.news.domin.model.signUpResult
 import com.example.news.domin.model.toAuthRequst
+import com.example.news.data.remote.datasource.mapRemoteUserToUser
+import com.example.news.domin.model.User
 
 class AuthRepoImp(
     private val authRemoteDataSource: AuthRemoteDataSource = AuthRemoteDataSourceImp(),
     private val userManager: UserManager = PreferencesData(),
 ) : AuthRepo {
 
-    override suspend fun login(email: String, password: String): Boolean {
+    override suspend fun login(email: String, password: String): Result<User> {
         val user = authRemoteDataSource.login(email, password)
+        val result = user.getOrNull()
+        if (user.isSuccess) {
+                result?.let {
+                    saveLoggedInData(LocalUser(it.userId ?: "", it.userName ?:"", it.email ?:""))
+                    return Result.success(it.mapRemoteUserToUser())
+                }
+            return Result.failure(IllegalArgumentException())
+        }else{
 
-        if (user != null) {
-            saveLoggedInData(LocalUser(user.userId, user.userName, user.email))
-            return true
+                return Result.failure(user.exceptionOrNull()!!)
         }
-
-        return false
     }
 
     override suspend fun signUP(signUpForm: SignUpForm): Result<SignUpResult>{

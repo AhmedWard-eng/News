@@ -11,4 +11,8 @@ class FackUserManager : UserManager {
         userId = localUser.userId
         userName = localUser.userName
     }
+
+    override fun getUserData(): Result<LocalUser> {
+        TODO("Not yet implemented")
+    }
 }
