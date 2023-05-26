@@ -1,5 +1,6 @@
 package com.example.news.data.remote.datasource
 
+import com.example.news.data.remote.entity.AuthResponse
 import com.example.news.data.repo.AuthRepoImp
 
 class Auth : AuthRemoteDataSource {
@@ -7,7 +8,7 @@ class Auth : AuthRemoteDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String): Boolean {
+    override suspend fun signUP(email: String, userName: String, password: String): AuthResponse {
         TODO("Not yet implemented")
     }
 
