@@ -6,6 +6,10 @@ import com.example.news.data.local.preferences.UserManager
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
 
 import com.example.news.data.remote.datasource.AuthRemoteDataSourceImp
+import com.example.news.domin.model.SignUpForm
+import com.example.news.domin.model.SignUpResult
+import com.example.news.domin.model.signUpResult
+import com.example.news.domin.model.toAuthRequst
 
 class AuthRepoImp(
     private val authRemoteDataSource: AuthRemoteDataSource = AuthRemoteDataSourceImp(),
@@ -23,10 +27,10 @@ class AuthRepoImp(
         return false
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String) : Result<Boolean>{
+    override suspend fun signUP(signUpForm: SignUpForm): Result<SignUpResult>{
         return try {
-            authRemoteDataSource.signUP(email, userName, password)
-            Result.success(true)
+            val result =  authRemoteDataSource.signUP(signUpForm.toAuthRequst())
+            return Result.success(result.signUpResult())
         }catch (e: Exception){
             Result.failure(Exception(e.message))
         }

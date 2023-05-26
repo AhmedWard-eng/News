@@ -1,34 +1,27 @@
 package com.example.news.ui.registration
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.news.R
+import com.example.news.data.repo.AuthRepo
+import com.example.news.data.repo.AuthRepoImp
+import com.example.news.databinding.RegistrationUiBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegistrationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegistrationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    lateinit var binding: RegistrationUiBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
 
     }
 
@@ -36,27 +29,56 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.registration_ui, container, false)
+        binding = RegistrationUiBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegistrationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegistrationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val authRepo: AuthRepo = AuthRepoImp()
+
+        val viewModel : RegistrationViewModel by viewModels {
+            RegistViewModelFactory(authRepo)
+        }
+
+        binding.registButton.setOnClickListener {
+            val email = binding.emailTextField.text
+            val userName = binding.userNameTextField.text
+            val password = binding.passwordTextField.text
+
+            if(!viewModel.validateUserName(userName = userName.toString())){
+                binding.userNameTextField.error = viewModel.signUpUserName.value
             }
+            if(!viewModel.validateEmail(email = email.toString())){
+                binding.emailTextField.error = viewModel.signUpEmail.value
+            }
+            if(!viewModel.validatePassword(password= password.toString())){
+                binding.passwordTextField.error = viewModel.signUpPassword.value
+            }
+
+            if (viewModel.validateEmail(email.toString()) && viewModel.validatePassword(password.toString()) && viewModel.validateUserName(userName.toString())) {
+                viewModel.postSignUp(email.toString(), userName.toString(), password.toString())
+            }else{
+                Toast.makeText(context, "Invalid Registration, try again", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.signUpLoading.collectLatest {
+                Log.i("TAG", "Loading")
+            }
+            viewModel.signUpSuccess.collectLatest {
+                Log.i("TAG", "Success")
+                Toast.makeText(context, "Registration successfully", Toast.LENGTH_SHORT).show()
+            }
+            viewModel.signUpError.collectLatest {
+                Log.i("TAG", "Error")
+                Toast.makeText(context, "Error, failed to register", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
     }
+
 }
