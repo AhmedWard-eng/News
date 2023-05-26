@@ -5,13 +5,12 @@ import android.content.SharedPreferences
 import androidx.datastore.preferences.preferencesDataStore
 
 
-const val USER_PREF = "USER_PREF"
-const val userId = "userId"
-const val  name = "name"
-const val email = "email"
+private const val userId = "userId"
+private const val  name = "name"
+private const val email = "email"
 
 
-class PreferencesData(private val sharedPreferences: SharedPreferences? = SharedPref.sharedPreferences) : UserManager {
+class PreferencesData(private val sharedPreferences: SharedPreferences = SharedPref.sharedPreferences) : UserManager {
 
 
     private val editor = sharedPreferences?.edit()
@@ -22,12 +21,20 @@ class PreferencesData(private val sharedPreferences: SharedPreferences? = Shared
         editor?.apply()
     }
 
-    override fun getUserData() : LocalUser{
-        return LocalUser(
-            userId = sharedPreferences?.getString(userId,"") ?: "",
-            name = sharedPreferences?.getString(name,"") ?: "",
-            email = sharedPreferences?.getString(email,"") ?: ""
-        )
+    override fun getUserData() : Result<LocalUser>{
+        val userId =  sharedPreferences.getString(userId,"")
+        val name = sharedPreferences.getString(name,"")
+        val email = sharedPreferences.getString(email,"")
+        if(userId != null && name != null && email != null){
+            return Result.success(LocalUser(
+                userId = userId,
+                name = name,
+                email = email
+            ))
+        }else{
+            return Result.failure(Exception("User not Found"))
+        }
+
     }
 
 
