@@ -21,18 +21,18 @@ class PreferencesData(private val sharedPreferences: SharedPreferences = SharedP
         editor?.apply()
     }
 
-    override fun getUserData() : Result<LocalUser>{
-        val userId =  sharedPreferences.getString(userId,"")
-        val name = sharedPreferences.getString(name,"")
-        val email = sharedPreferences.getString(email,"")
-        return if(userId != null && name != null && email != null){
-            Result.success(LocalUser(
-                userId = userId,
-                name = name,
-                email = email
-            ))
-        }else{
+    override fun getUserData(): Result<LocalUser> {
+        val userId = sharedPreferences.getString(userId, "")
+        val name = sharedPreferences.getString(name, "")
+        val email = sharedPreferences.getString(email, "")
+        return if (userId.isNullOrBlank() || name.isNullOrBlank() || email.isNullOrBlank()) {
             Result.failure(Exception("User not Found"))
+        } else {
+            Result.success(
+                LocalUser(
+                    userId = userId, name = name, email = email
+                )
+            )
         }
 
     }
