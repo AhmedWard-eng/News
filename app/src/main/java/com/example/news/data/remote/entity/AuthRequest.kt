@@ -1,4 +1,7 @@
 package com.example.news.data.remote.entity
 
-class AuthRequest {
-}
+data class AuthRequest(
+    val displayName: String,
+    val email: String,
+    val password: String
+)
