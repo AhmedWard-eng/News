@@ -1,6 +1,7 @@
 package com.example.news.data.repo
 
 import com.example.news.data.local.preferences.LocalUser
+import com.example.news.data.repo.auth.AuthRepo
 
 class FackAuthRepo : AuthRepo {
 
