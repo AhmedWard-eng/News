@@ -1,11 +1,9 @@
 package com.example.news.domin.model
 
-import com.example.news.data.local.entity.LocalNews
-import com.example.news.data.remote.entity.AuthRequest
-import com.example.news.data.remote.entity.AuthResponse
+import com.example.news.data.remote.entity.SignupRequest
 
 data class SignUpForm(val password: String, val userName: String, val email: String)
 
-fun SignUpForm.toAuthRequst(): AuthRequest {
-    return AuthRequest(displayName = userName, email = email, password = password)
+fun SignUpForm.toAuthRequst(): SignupRequest {
+    return SignupRequest(displayName = userName, email = email, password = password)
 }

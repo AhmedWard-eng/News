@@ -6,6 +6,9 @@ import com.example.news.data.local.preferences.UserManager
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
 
 import com.example.news.data.remote.datasource.AuthRemoteDataSourceImp
+import com.example.news.domin.model.SignUpForm
+import com.example.news.domin.model.SignUpResult
+import com.example.news.domin.model.toAuthRequst
 
 class AuthRepoImp(
     private val authRemoteDataSource: AuthRemoteDataSource = AuthRemoteDataSourceImp(),
