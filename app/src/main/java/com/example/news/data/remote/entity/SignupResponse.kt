@@ -1,6 +1,6 @@
 package com.example.news.data.remote.entity
 
-data class AuthResponse(
+data class SignupResponse(
     val email: String,
     val expiresIn: String,
     val idToken: String,
