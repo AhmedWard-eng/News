@@ -42,7 +42,7 @@ class AuthRepoImpTest {
 
     @Test
     fun signUp() = runBlockingTest {
-        val user = authRepoImp?.signUP("email", "userName", "password")
+        val user = authRepoImp?.signUP()
 
         assertThat(user, IsEqual(true))
     }

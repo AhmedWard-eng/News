@@ -1,5 +1,7 @@
 package com.example.news.data.remote.datasource
 
+import com.example.news.data.remote.entity.AuthRequest
+
 class FackAuthRemoteDataSource : AuthRemoteDataSource {
 
     var email = "email"
@@ -15,7 +17,7 @@ class FackAuthRemoteDataSource : AuthRemoteDataSource {
         }
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String): Boolean {
+    override suspend fun signUP(authRequest: AuthRequest): Boolean {
         this.email = email
         this.userName = userName
         this.password = password

@@ -8,3 +8,4 @@ data class AuthResponse(
     val localId: String,
     val refreshToken: String
 )
+
