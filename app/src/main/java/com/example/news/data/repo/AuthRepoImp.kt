@@ -7,13 +7,13 @@ import com.example.news.data.remote.datasource.Auth
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
 import com.example.news.domin.model.User
 
-class AuthRepoImp (private val authRemoteDataSource: AuthRemoteDataSource = Auth(),
-                   private val userManager: UserManager = PreferncesData() )
-    :AuthRepo   {
+class AuthRepoImp(
+    private val authRemoteDataSource: AuthRemoteDataSource = Auth(),
+    private val userManager: UserManager = PreferncesData(),
+) : AuthRepo {
 
-    override suspend fun login(email: String, password: String) : Boolean {
+    override suspend fun login(email: String, password: String): Boolean {
         val user = authRemoteDataSource.login(email, password)
-
 
         if (user != null) {
             saveLoggedInData(LocalUser(user.userId, user.userName, user.email))
@@ -27,7 +27,7 @@ class AuthRepoImp (private val authRemoteDataSource: AuthRemoteDataSource = Auth
         return authRemoteDataSource.signUP(email, userName, password)
     }
 
-    override suspend fun logout() : Boolean {
+    override suspend fun logout(): Boolean {
         return authRemoteDataSource.logout()
     }
 

@@ -4,8 +4,6 @@ import com.example.news.data.local.preferences.LocalUser
 
 class FackAuthRepo : AuthRepo {
 
-
-
     override suspend fun login(email: String, password: String): Boolean {
         TODO("Not yet implemented")
     }
