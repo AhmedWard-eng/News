@@ -1,4 +1,4 @@
-package com.example.news.data.repo
+package com.example.news.data.repo.auth
 
 import com.example.news.data.local.preferences.LocalUser
 import com.example.news.data.local.preferences.PreferencesData

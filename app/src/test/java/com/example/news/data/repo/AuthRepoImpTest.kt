@@ -1,5 +1,6 @@
 package com.example.news.data.repo
 
+import com.example.news.data.repo.auth.AuthRepoImp
 import org.junit.After
 import org.junit.Before
 
