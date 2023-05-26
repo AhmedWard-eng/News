@@ -1,4 +1,9 @@
 package com.example.news.ui.login
 
-class LoginViewModel {
+
+import com.example.news.data.repo.AuthRepo
+import com.example.news.data.repo.AuthRepoImp
+
+class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) {
+
 }
