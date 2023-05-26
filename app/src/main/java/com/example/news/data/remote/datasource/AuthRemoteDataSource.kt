@@ -6,6 +6,5 @@ import com.example.news.domin.model.User
 interface AuthRemoteDataSource {
     suspend fun login(email:String,password:String) : Result<RemoteUser>
     suspend fun signUP(email: String,userName:String,password: String) : AuthResponse
-    suspend fun logout() : Boolean
 
 }

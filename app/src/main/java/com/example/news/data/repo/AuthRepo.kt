@@ -1,7 +1,6 @@
 package com.example.news.data.repo
 
 import com.example.news.data.local.preferences.LocalUser
-import com.example.news.data.remote.datasource.RemoteUser
 import com.example.news.data.remote.entity.AuthResponse
 import com.example.news.domin.model.User
 

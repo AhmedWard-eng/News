@@ -1,9 +1,7 @@
 package com.example.news.data.remote.network
 
 import com.example.news.BuildConfig
-import com.example.news.data.remote.datasource.RemoteUser
 import com.example.news.data.remote.entity.AuthRequest
-import com.example.news.data.remote.entity.AuthRequestLogIn
 import com.example.news.data.remote.entity.AuthResponse
 
 import retrofit2.http.Body
