@@ -1,19 +1,15 @@
 package com.example.news.data.repo
 
 import com.example.news.data.local.preferences.LocalUser
-import com.example.news.data.local.preferences.PreferncesData
+import com.example.news.data.local.preferences.PreferencesData
 import com.example.news.data.local.preferences.UserManager
-import com.example.news.data.remote.datasource.Auth
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
-import com.example.news.data.remote.entity.AuthResponse
-import com.example.news.domin.model.SignUpForm
-import com.example.news.domin.model.SignUpResult
-import com.example.news.domin.model.signUpResult
-import com.example.news.domin.model.toAuthRequst
+
+import com.example.news.data.remote.datasource.AuthRemoteDataSourceImp
 
 class AuthRepoImp(
-    private val authRemoteDataSource: AuthRemoteDataSource = Auth(),
-    private val userManager: UserManager = PreferncesData(),
+    private val authRemoteDataSource: AuthRemoteDataSource = AuthRemoteDataSourceImp(),
+    private val userManager: UserManager = PreferencesData(),
 ) : AuthRepo {
 
     override suspend fun login(email: String, password: String): Boolean {
@@ -27,13 +23,17 @@ class AuthRepoImp(
         return false
     }
 
-    override suspend fun signUP(signUpForm: SignUpForm): SignUpResult {
-        val result =  authRemoteDataSource.signUP(signUpForm.toAuthRequst())
-        return result.signUpResult()
+    override suspend fun signUP(email: String, userName: String, password: String) : Boolean{
+        return try {
+            authRemoteDataSource.signUP(email, userName, password)
+            true
+        }catch (e: Exception){
+            false
+        }
     }
 
     override suspend fun logout(): Boolean {
-        return authRemoteDataSource.logout()
+        TODO()
     }
 
     override suspend fun saveLoggedInData(localUser: LocalUser) {
