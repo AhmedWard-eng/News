@@ -24,7 +24,7 @@ class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel
             loading.value = true
             var result = authRepo.login(email, password)
             loading.value = false
-            if (authRepo.login(email, password))
+            if (result.isSuccess)
                 _loginResponse.value = true
             else {
                 _loginResponse.value = false
