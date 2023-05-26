@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">News</string>
+  /***Yasmeen***/
+    <string name="login">LogIn</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="signup">signUp</string>
+    /***Yasmeen***/
+    <!-- TODO: Remove or change this placeholder text -->
+
+
     /***Nada***/
     <string name="userName_regist">Name</string>
     <string name="email_regist">Email</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="password_regist">Password</string>
     /***Nada***/
+
 </resources>
