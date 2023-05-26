@@ -40,13 +40,13 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
             val form = SignUpForm(userName = userName , email = email , password = password)
             val response =  repo.signUP(form)
             signUpMutableLoading.value = false
-//            if(response.isSuccess){
-//                signUpMutableSuccess.value = true
-//                Log.i("Success", "Success")
-//            }else{
-//                signUpMutableError.value = true
-//                Log.i("Error", "Error")
-//            }
+            if(response.isSuccess){
+                signUpMutableSuccess.value = true
+                Log.i("Success", "Success")
+            }else{
+                signUpMutableError.value = true
+                Log.i("Error", "Error")
+            }
         }
     }
 
@@ -59,8 +59,8 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
     }
 
     fun validateUserName(userName : String): Boolean {
-        if (userName.isEmpty()) {
-            signUpUserName.value = "Invalid email"
+        if (userName.isEmpty() || userName.length <= 2) {
+            signUpUserName.value = "Invalid UserName"
             return false
         }
         return true
@@ -68,7 +68,7 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
 
     fun validatePassword(password : String): Boolean {
         if (password.isEmpty() && password.length >= 6) {
-            signUpPassword.value = "Invalid email"
+            signUpPassword.value = "Invalid Password"
             return false
         }
         return true
