@@ -5,6 +5,8 @@ import com.example.news.data.local.preferences.PreferncesData
 import com.example.news.data.local.preferences.UserManager
 import com.example.news.data.remote.datasource.Auth
 import com.example.news.data.remote.datasource.AuthRemoteDataSource
+import com.example.news.data.remote.entity.AuthRequest
+import com.example.news.data.remote.entity.AuthResponse
 import com.example.news.domin.model.User
 
 class AuthRepoImp(
@@ -23,7 +25,7 @@ class AuthRepoImp(
         return false
     }
 
-    override suspend fun signUP(email: String, userName: String, password: String): Boolean {
+    override suspend fun signUP(email: String, userName: String, password: String): AuthResponse {
         return authRemoteDataSource.signUP(email, userName, password)
     }
 
