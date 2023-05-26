@@ -1,10 +1,11 @@
 package com.example.news.data.repo.news
 
 import com.example.news.domin.model.News
+import kotlinx.coroutines.flow.Flow
 
 interface NewsRepo {
-    suspend fun getNews() : List<News>
-    suspend fun getFavorites() : List<News>
-    suspend fun addToFavorites(news: News)
-    suspend fun removeFromFavorites(news: News)
+    fun getNews() : Flow<List<News>>
+    fun getFavorites() : Flow<List<News>>
+    suspend fun addToFavorites(news: News) : Result<Boolean>
+    suspend fun removeFromFavorites(news: News) : Result<Boolean>
 }
