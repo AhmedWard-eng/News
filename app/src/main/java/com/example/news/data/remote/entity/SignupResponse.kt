@@ -7,5 +7,5 @@ data class SignupResponse(
     val kind: String?,
     val localId: String?,
     val refreshToken: String?,
-    val error : ErrorX?
+    val error : ErrorBody?
 )
