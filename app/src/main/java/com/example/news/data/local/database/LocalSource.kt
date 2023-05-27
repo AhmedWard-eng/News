@@ -11,7 +11,7 @@ interface LocalSource {
     suspend fun insertNews(localNewsList: List<LocalNews>)
     fun getAllNews(): Flow<List<LocalNews>>
     suspend fun deleteNews(localNews: LocalNews)
-    fun getFavNewsWithTitle(title: String): Flow<LocalNews>
+    fun getFavNewsWithTitle(title: String): Flow<FavNews>
     suspend fun insertFavNews(favNews: FavNews)
     fun getAllFavNews(): Flow<List<FavNews>>
     suspend fun deleteFavNews(title: String)

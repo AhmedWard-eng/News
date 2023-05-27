@@ -23,7 +23,7 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        newsDAO.deleteNews(localNews)
     }
 
-    override fun getFavNewsWithTitle(title: String): Flow<LocalNews> {
+    override fun getFavNewsWithTitle(title: String): Flow<FavNews> {
        return  newsDAO.getFavNewsWithTitle(title)
     }
 
