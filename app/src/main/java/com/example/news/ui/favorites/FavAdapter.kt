@@ -31,7 +31,10 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
             true
         }
         holder.binding.txtTitleHome.text = item.title
-        holder.binding.imageResultItemMeal
+        holder.binding.imageResultItemMeal.setImageUsingGlide(item.urlToImage)
+
+
+
     }
 
     class ViewHolder(val binding: NewsListRowBinding) :RecyclerView.ViewHolder(binding.root)
@@ -54,8 +57,7 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
     }
 }
 
-fun ImageView.setImageFromWeatherIconId(url: String){
-
+fun ImageView.setImageUsingGlide(url: String){
     Glide.with(this)
         .load(url)
         .into(this)
