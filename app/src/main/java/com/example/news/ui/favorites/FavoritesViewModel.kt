@@ -10,7 +10,9 @@ import kotlinx.coroutines.launch
 class FavoritesViewModel(private val newsRepo: NewsRepo = NewsRepoImp()) : ViewModel() {
 
     val news = newsRepo.getFavorites()
-    fun deleteFromFav(news:News){
+
+    var list: List<News>? = null
+    fun deleteFromFav(news: News) {
         viewModelScope.launch {
             newsRepo.removeFromFavorites(news)
         }
