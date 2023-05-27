@@ -37,5 +37,12 @@ class PreferencesData(private val sharedPreferences: SharedPreferences = SharedP
         }
     }
 
+    override fun removeUserData() {
+        editor?.putString(userId, null)
+        editor?.putString(name, null)
+        editor?.putString(email, null)
+        editor?.apply()
+    }
+
 
 }

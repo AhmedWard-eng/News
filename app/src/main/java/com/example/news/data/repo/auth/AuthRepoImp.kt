@@ -22,28 +22,27 @@ class AuthRepoImp(
         val user = authRemoteDataSource.login(email, password)
         val result = user.getOrNull()
         if (user.isSuccess) {
-                result?.let {
-                    saveLoggedInData(LocalUser(it.userId ?: "", it.userName ?:"", it.email ?:""))
-                    return Result.success(it.mapRemoteUserToUser())
-                }
+            result?.let {
+                saveLoggedInData(LocalUser(it.userId ?: "", it.userName ?: "", it.email ?: ""))
+                return Result.success(it.mapRemoteUserToUser())
+            }
             return Result.failure(IllegalArgumentException())
-        }else{
-
-                return Result.failure(user.exceptionOrNull()!!)
+        } else {
+            return Result.failure(user.exceptionOrNull()!!)
         }
     }
 
-    override suspend fun signUP(signUpForm: SignUpForm): Result<SignUpResult>{
+    override suspend fun signUP(signUpForm: SignUpForm): Result<SignUpResult> {
         return try {
-            val result =  authRemoteDataSource.signUP(signUpForm.toAuthRequst())
+            val result = authRemoteDataSource.signUP(signUpForm.toAuthRequst())
             return Result.success(result.signUpResult())
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(Exception(e.message))
         }
     }
 
-    override suspend fun logout(): Boolean {
-        TODO()
+    override suspend fun logout() {
+       userManager.removeUserData()
     }
 
     override suspend fun saveLoggedInData(localUser: LocalUser) {

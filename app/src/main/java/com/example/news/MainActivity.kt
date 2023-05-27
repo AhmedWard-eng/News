@@ -16,6 +16,7 @@ import com.example.news.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: MainActivityNewsModel

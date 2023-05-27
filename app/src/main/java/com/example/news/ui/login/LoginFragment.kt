@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import com.example.news.R
 import com.example.news.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
 
@@ -17,47 +19,36 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val email = binding.emailInputLogin.text.toString()
-        val password = binding.passwordInputLogin.text.toString()
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        binding.progressBar.visibility = View.GONE
+
         lifecycleScope.launch {
             loginViewModel.loading.collect {
                 when (it) {
                     true -> {
-                        Toast.makeText(
-                            context,
-                            "Loading",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                        binding.progressBar.visibility = View.VISIBLE                    }
                     else -> {
-                        Toast.makeText(
-                            context,
-                            "Loading is Stopped",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }
-
-
         }
+
+
         lifecycleScope.launch {
-            loginViewModel.loginResponse.collect {
+            loginViewModel.loginResponse.collect{
                 when (it) {
                     false -> {
                         Toast.makeText(
@@ -66,23 +57,33 @@ class LoginFragment : Fragment() {
                             Toast.LENGTH_LONG
                         )
                             .show()
-                    }
-                    else -> {
 
+                    }
+                    true -> {
                         Toast.makeText(
                             context,
                             "Login Successfully",
                             Toast.LENGTH_LONG
                         )
                             .show()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
+
+                    }
+                    else -> {
+
                     }
                 }
             }
         }
+
         binding.btnLogin.setOnClickListener {
+            val email = binding.emailInputLogin.text.toString()
+            val password = binding.passwordInputLogin.text.toString()
             loginViewModel.login(email, password)
+        }
 
-
+        binding.txtSignUp.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_registrationFragment2)
         }
     }
 }
