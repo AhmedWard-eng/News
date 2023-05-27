@@ -2,9 +2,11 @@ package com.example.news.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.news.databinding.NewsListRowBinding
 import com.example.news.domin.model.News
 
@@ -29,7 +31,10 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
             true
         }
         holder.binding.txtTitleHome.text = item.title
-        holder.binding.imageResultItemMeal
+        holder.binding.imageResultItemMeal.setImageUsingGlide(item.urlToImage)
+
+
+
     }
 
     class ViewHolder(val binding: NewsListRowBinding) :RecyclerView.ViewHolder(binding.root)
@@ -50,4 +55,10 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
         fun onRemoveClick(news: News) = removeClickListener(news)
         fun onItemClick(news: News) = itemClickListener(news)
     }
+}
+
+fun ImageView.setImageUsingGlide(url: String){
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }
