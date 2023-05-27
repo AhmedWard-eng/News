@@ -17,4 +17,11 @@
     <string name="password_regist">Password</string>
     /***Nada***/
 
+    /***Ward***/
+
+    <string name="internet_connection_is_restored">Internet Connection is restored</string>
+    <string name="internet_connection_is_lost">Internet Connection is lost</string>
+
+    /***Ward***/
+
 </resources>
