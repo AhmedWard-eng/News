@@ -66,6 +66,7 @@ dependencies {
 
     /**Fatma*/
 
+    implementation "com.airbnb.android:lottie:5.2.0"
     /**Fatma*/
 
     /**Nada*/

@@ -31,6 +31,8 @@
             android:id="@+id/action_homeFragment_to_newsDetailsFragment6"
             app:destination="@id/newsDetailsFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_logoutFragment"
+            app:destination="@id/logoutFragment" />
             android:id="@+id/action_homeFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
