@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class NewsDetailsFragment : Fragment() {
 
     lateinit var binding: FragmentNewsDetailsBinding
-    //val args: NewsDetailsFragmentArgs by navArgs()
+    val args: NewsDetailsFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +46,7 @@ class NewsDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        var news: News = News()
-//        news.title = "title"
-//        news.isFav = true
-//        args.currentNew = News()
-//        var news = args.currentNew
+        var news = args.currentNew
 
         binding.titleTextView.text = news.title
         binding.authorTextView.text = news.author
