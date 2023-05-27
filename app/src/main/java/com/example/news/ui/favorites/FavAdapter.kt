@@ -2,9 +2,11 @@ package com.example.news.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.news.databinding.NewsListRowBinding
 import com.example.news.domin.model.News
 
@@ -50,4 +52,11 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
         fun onRemoveClick(news: News) = removeClickListener(news)
         fun onItemClick(news: News) = itemClickListener(news)
     }
+}
+
+fun ImageView.setImageFromWeatherIconId(url: String){
+
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }
