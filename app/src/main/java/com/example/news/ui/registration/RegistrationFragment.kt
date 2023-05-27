@@ -1,16 +1,13 @@
 package com.example.news.ui.registration
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.news.R
 import com.example.news.data.repo.auth.AuthRepo
 import com.example.news.data.repo.auth.AuthRepoImp
 
@@ -67,15 +64,12 @@ class RegistrationFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.signUpLoading.collectLatest {
-                Log.i("TAG", "Loading")
             }
             viewModel.signUpSuccess.collectLatest {
-                Log.i("TAG", "Success")
                 Toast.makeText(context, "Registration successfully", Toast.LENGTH_SHORT).show()
             }
             viewModel.signUpError.collectLatest {
-                Log.i("TAG", "Error")
-                Toast.makeText(context, "Error, failed to register", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
 

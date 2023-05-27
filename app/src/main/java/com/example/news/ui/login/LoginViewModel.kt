@@ -1,6 +1,7 @@
 package com.example.news.ui.login
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
@@ -22,13 +23,16 @@ class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel
 
         viewModelScope.launch {
             loading.value = true
-            var result = authRepo.login(email, password)
+            val result = authRepo.login(email, password)
             loading.value = false
             if (result.isSuccess)
                 _loginResponse.value = true
             else {
                 _loginResponse.value = false
-                error = "UserName or Password not valid"
+                result.onFailure {
+                    error = it.message ?: ""
+                    Log.i("yyyyyyyyyyyyy",it.message ?: "")
+                }
             }
 
         }

@@ -21,7 +21,7 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
     private var signUpMutableSuccess = MutableStateFlow<Boolean?>(false)
     var signUpSuccess = signUpMutableSuccess
 
-    private var signUpMutableError = MutableStateFlow<Boolean?>(false)
+    private var signUpMutableError = MutableStateFlow<String?>(null)
     var signUpError = signUpMutableError
 
 
@@ -42,10 +42,10 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
             signUpMutableLoading.value = false
             if(response.isSuccess){
                 signUpMutableSuccess.value = true
-                Log.i("Success", "Success")
             }else{
-                signUpMutableError.value = true
-                Log.i("Error", "Error")
+                response.onFailure {
+                    signUpMutableError.value = it.message
+                }
             }
         }
     }

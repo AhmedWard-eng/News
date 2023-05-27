@@ -23,12 +23,11 @@ class AuthRepoImp(
         val result = user.getOrNull()
         if (user.isSuccess) {
                 result?.let {
-                    saveLoggedInData(LocalUser(it.userId ?: "", it.userName ?:"", it.email ?:""))
+                    saveLoggedInData(LocalUser(it.localId ?: "", it.displayName ?:"", it.email ?:""))
                     return Result.success(it.mapRemoteUserToUser())
                 }
             return Result.failure(IllegalArgumentException())
         }else{
-
                 return Result.failure(user.exceptionOrNull()!!)
         }
     }
