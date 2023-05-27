@@ -48,4 +48,15 @@
             android:id="@+id/action_registrationFragment_to_loginFragment2"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.example.news.ui.logout.LogoutFragment"
+        android:label="fragment_logout"
+        tools:layout="@layout/fragment_logout" >
+        <action
+            android:id="@+id/action_logoutFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/logoutFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

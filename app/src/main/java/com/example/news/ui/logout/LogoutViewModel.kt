@@ -3,14 +3,15 @@ package com.example.news.ui.logout
 import androidx.lifecycle.ViewModel
 import com.example.news.data.local.preferences.PreferencesData
 import com.example.news.data.local.preferences.UserManager
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class LogoutViewModel(private val preferencesData: UserManager = PreferencesData()) : ViewModel() {
 
-    var userName: String = ""
-        private set
+    private var userNameMutableError = MutableStateFlow<String?>(null)
+    var userName = userNameMutableError
 
-    var email: String = ""
-        private set
+    private var emailMutableError = MutableStateFlow<String?>(null)
+    var email = emailMutableError
 
     init {
         getData()
@@ -20,8 +21,8 @@ class LogoutViewModel(private val preferencesData: UserManager = PreferencesData
         val result = preferencesData.getUserData()
         if (result.isSuccess) {
             result.onSuccess {
-                userName = it.userName
-                email = it.email
+                userNameMutableError.value = it.userName
+                emailMutableError.value = it.email
             }
         }
     }
