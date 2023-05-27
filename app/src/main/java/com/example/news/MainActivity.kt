@@ -2,6 +2,11 @@ package com.example.news
 
 import android.os.Bundle
 import android.view.View
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -50,5 +55,21 @@ class MainActivity : AppCompatActivity() {
             view, getString(stringId), Snackbar.LENGTH_LONG
         )
         snackBar.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if (id == R.id.favouriteItem) {
+            Toast.makeText(this, "Favorite Clicked", Toast.LENGTH_LONG).show()
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

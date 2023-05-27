@@ -6,6 +6,7 @@ import com.example.news.data.local.database.NewsLocalSource
 import com.example.news.data.local.entity.FavNews
 import com.example.news.data.local.entity.toNews
 import com.example.news.data.remote.datasource.news.NewsRemoteData
+import com.example.news.data.remote.datasource.news.NewsRemoteDataImp
 import com.example.news.data.remote.entity.toLocalNews
 import com.example.news.domin.model.News
 import com.example.news.domin.model.toLocalNews
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class NewsRepoImp(
-    private val newsRemoteData: NewsRemoteData,
+    private val newsRemoteData: NewsRemoteData = NewsRemoteDataImp(),
     private val newLocalSource: LocalSource = NewsLocalSource()
 ) : NewsRepo {
 
@@ -22,7 +23,8 @@ class NewsRepoImp(
     override suspend fun refreshNews() {
         try {
             val remoteNews = newsRemoteData.getNews()
-            newLocalSource.insertNews(remoteNews.map { it.toLocalNews() })
+            val localNews = remoteNews.map { it.toLocalNews() }
+            newLocalSource.insertNews(localNews)
         } catch (e: Exception) {
             Log.e("Network Error", "refreshNews: ${e.message} ")
         }
