@@ -30,9 +30,10 @@ class NewsRepoImp(
     }
 
     override fun getNews(): Flow<List<News>> {
-        return newLocalSource.getAllNews().map { localNewsList ->
-            localNewsList.map {
-                it.toNews()
+        return newLocalSource.getAllFavNews().combine(newLocalSource.getAllNews()) { fav, news ->
+            news.map {
+                val favorite = fav.firstOrNull { favNews -> favNews.title==it.title }
+                it.toNews(isFav = favorite != null )
             }
         }
     }
