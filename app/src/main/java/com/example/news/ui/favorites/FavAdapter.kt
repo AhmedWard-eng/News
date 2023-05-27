@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.news.databinding.NewsListRowBinding
 import com.example.news.domin.model.News
+import de.hdodenhof.circleimageview.CircleImageView
 
 class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAdapter.ViewHolder>(DiffUtils) {
 
@@ -57,7 +58,7 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
     }
 }
 
-fun ImageView.setImageUsingGlide(url: String){
+fun CircleImageView.setImageUsingGlide(url: String){
     Glide.with(this)
         .load(url)
         .into(this)
