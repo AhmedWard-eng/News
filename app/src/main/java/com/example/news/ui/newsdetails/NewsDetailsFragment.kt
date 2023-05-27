@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.news.R
 import com.example.news.data.repo.auth.AuthRepo
 import com.example.news.data.repo.auth.AuthRepoImp
@@ -53,37 +54,36 @@ class NewsDetailsFragment : Fragment() {
         binding.authorTextView.text = news.author
         binding.dateTextView.text = news.publishedAt
         binding.contentTextView.text = news.content
-//        Glide.with(this)
-//            .load(news.urlToImage)
-//            .into(binding.newsImageView)
+        Glide.with(this)
+            .load(news.urlToImage)
+            .into(binding.newsImageView)
 
         val viewModel = ViewModelProvider(this)[NewsDetailsViewModel::class.java]
-        var isFav = viewModel.isFavData.value
+//        var isFav = viewModel.isFavData.value
+
+            viewModel.getNewByTitle(news)
 
         lifecycleScope.launch {
-            viewModel.getNewByTitle(news)
-        }
-        lifecycleScope.launch {
             viewModel.isFavData.collect { isFavorite ->
-                binding.newsFabButton.setImageResource(if (isFav) R.drawable.baseline_fill_favorite_24 else R.drawable.baseline_favorite_border_24)
-                if (isFav) {
-                    viewModel.addToFav(news)
-                } else {
-                    AlertDialog.Builder(requireContext())
-                        .setTitle("Delete From Favorite")
-                        .setCancelable(false)
-                        .setMessage("Are you sure you want to delete new from favorite")
-                        .setPositiveButton(
-                            getString(android.R.string.ok)
-                        ) { _, _ ->
-                            viewModel.deleteFromFav(news)
-                        }.show()
-                }
+                binding.newsFabButton.setImageResource(if (isFavorite) R.drawable.baseline_fill_favorite_24 else R.drawable.baseline_favorite_border_24)
+//                if (isFav) {
+//                    viewModel.addToFav(news)
+//                } else {
+//                    AlertDialog.Builder(requireContext())
+//                        .setTitle("Delete From Favorite")
+//                        .setCancelable(false)
+//                        .setMessage("Are you sure you want to delete new from favorite")
+//                        .setPositiveButton(
+//                            getString(android.R.string.ok)
+//                        ) { _, _ ->
+//                            viewModel.deleteFromFav(news)
+//                        }.show()
+//                }
             }
         }
 
         binding.newsFabButton.setOnClickListener {
-            viewModel.changeFavIcon()
+            viewModel.changeFavIcon(currentNew = news)
         }
 
     }

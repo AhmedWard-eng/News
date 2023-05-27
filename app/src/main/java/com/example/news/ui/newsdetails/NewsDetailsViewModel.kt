@@ -22,29 +22,13 @@ class NewsDetailsViewModel(private val repo: NewsRepo = NewsRepoImp()) : ViewMod
 
     fun deleteFromFav(currentNew: News) {
         viewModelScope.launch {
-            var result = repo.removeFromFavorites(currentNew)
-            if (result.isSuccess) {
-                signUpMutableSuccess.value = true
-            } else {
-                result.onFailure {
-                    signUpMutableError.value = it.message ?: ""
-
-                }
-            }
+            repo.removeFromFavorites(currentNew)
         }
     }
 
     fun addToFav(currentNew: News) {
         viewModelScope.launch {
             var result = repo.addToFavorites(currentNew)
-            if (result.isSuccess) {
-                signUpMutableSuccess.value = true
-            } else {
-                result.onFailure {
-                    signUpMutableError.value = it.message ?: ""
-
-                }
-            }
         }
     }
 
@@ -55,7 +39,12 @@ class NewsDetailsViewModel(private val repo: NewsRepo = NewsRepoImp()) : ViewMod
         }
     }
 
-    fun changeFavIcon() {
+    fun changeFavIcon(currentNew: News) {
+        if (isFavMutableData.value) {
+            deleteFromFav(currentNew)
+        } else {
+            addToFav(currentNew)
+        }
         isFavMutableData.value = !isFavMutableData.value
     }
 
