@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment">
+
 
     <fragment
         android:id="@+id/splashFragment"
@@ -26,9 +27,9 @@
         android:name="com.example.news.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_newsDetailsFragment"-->
-<!--            app:destination="@id/newsDetailsFragment" />-->
+        <action
+            android:id="@+id/action_homeFragment_to_newsDetailsFragment6"
+            app:destination="@id/newsDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -49,9 +50,10 @@
         android:name="com.example.news.ui.newsdetails.NewsDetailsFragment"
         android:label="fragment_news_details"
         tools:layout="@layout/fragment_news_details" >
-        <argument
-            android:name="currentNew"
-            app:argType="com.example.news.domin.model.News" />
+          <argument
+              android:name="currentNews"
+              app:argType="com.example.news.domin.model.News"
+               />
       </fragment>
     <fragment
         android:id="@+id/registrationFragment"
