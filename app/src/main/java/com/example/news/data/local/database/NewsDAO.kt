@@ -11,6 +11,10 @@ interface NewsDAO {
     suspend fun insertNews(localNews: LocalNews)
     @Query("Select * from Articles")
     fun getAllNews(): Flow<List<LocalNews>>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNews(localNewsList: List<LocalNews>)
     @Delete
     suspend fun deleteNews(localNews: LocalNews)
 
@@ -20,6 +24,6 @@ interface NewsDAO {
     suspend fun insertFavNews(favNews: FavNews)
     @Query("Select * from Articles")
     fun getAllFavNews(): Flow<List<FavNews>>
-    @Delete
-    suspend fun deleteFavNews(favNews: FavNews)
+    @Query("Delete from FavoriteArticles where title = :title")
+    suspend fun deleteFavNews(title: String)
 }
