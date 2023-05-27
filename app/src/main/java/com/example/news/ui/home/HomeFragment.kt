@@ -39,7 +39,6 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
 
         lifecycleScope.launch {
             homeViewModel.news.collect {
-                print("///////////////////////////////count/////////// ${it.count()}")
                 homeAdapter.setList(it)
 
             }
