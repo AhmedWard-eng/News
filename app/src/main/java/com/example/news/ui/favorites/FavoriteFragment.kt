@@ -14,9 +14,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
 import com.example.news.R
 import com.example.news.databinding.FragmentFavoriteBinding
 import com.example.news.domin.model.News
+import com.example.news.ui.favorites.FavoriteFragmentDirections.ActionFavoriteFragmentToNewsDetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -94,7 +96,8 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun navigateToDetailsScreen(news: News) {
-        TODO("Not yet implemented")
+        val action =  FavoriteFragmentDirections.actionFavoriteFragmentToNewsDetailsFragment(news)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun deleteFromFav(news: News) {
