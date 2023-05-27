@@ -80,5 +80,9 @@
         android:id="@+id/favoriteFragment"
         android:name="com.example.news.ui.favorites.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
 </navigation>
