@@ -43,6 +43,13 @@ class RegistrationFragment : Fragment() {
             RegistViewModelFactory(authRepo)
         }
 
+        binding.registerProgressBar.visibility = View.GONE
+
+        binding.addAcountTextView.setOnClickListener {
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_registrationFragment_to_loginFragment2)
+        }
+
         binding.registButton.setOnClickListener {
             val email = binding.emailTextField.text
             val userName = binding.userNameTextField.text
@@ -83,6 +90,13 @@ class RegistrationFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.signUpLoading.collectLatest {
+                when (it) {
+                    true -> {
+                        binding.registerProgressBar.visibility = View.VISIBLE                    }
+                    else -> {
+                        binding.registerProgressBar.visibility = View.GONE
+                    }
+                }
             }
         }
 
