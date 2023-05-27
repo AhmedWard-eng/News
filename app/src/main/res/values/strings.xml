@@ -32,7 +32,9 @@
     <string name="logout">Logout</string>
     <string name="sure_logout">Are you sure that you want to logout</string>
     <string name="attention">Attention</string>
-
+    <string name= "Login_Successfully" >Login Successfully</string>
+    <string name= "Registration_successfully" >Registration successfully</string>
+    <string name="Invalid_Registration">Invalid Registration, try again</string>
 
     /***Fatma**/
 

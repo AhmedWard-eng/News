@@ -1,5 +1,6 @@
 package com.example.news.ui.registration
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
 import com.example.news.R
 import com.example.news.data.repo.auth.AuthRepo
@@ -31,11 +34,6 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = RegistrationUiBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         val authRepo: AuthRepo = AuthRepoImp()
 
@@ -68,26 +66,37 @@ class RegistrationFragment : Fragment() {
             if (viewModel.validateEmail(email.toString()) && viewModel.validatePassword(password.toString()) && viewModel.validateUserName(userName.toString())) {
                 viewModel.postSignUp(email.toString(), userName.toString(), password.toString())
             }else{
-                Toast.makeText(context, "Invalid Registration, try again", Toast.LENGTH_SHORT).show()
+
             }
         }
 
         lifecycleScope.launch {
-            viewModel.signUpSuccess.collectLatest {
-                when(it){
-                    false->{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
 
-                    }else -> {
-                        Toast.makeText(context, "Registration successfully", Toast.LENGTH_SHORT).show()
-                        Navigation.findNavController(requireView())
-                            .navigate(R.id.action_registrationFragment_to_loginFragment2)
+                viewModel.signUpSuccess.collectLatest {
+                    when (it) {
+                        false -> {
+
+                        }
+
+                        else -> {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle(getString(R.string.attention))
+                                .setCancelable(false).setMessage(R.string.Registration_successfully)
+                                .setPositiveButton(
+                                    getString(android.R.string.ok)
+                                ) { _, _ ->
+                                    Navigation.findNavController(requireView())
+                                        .navigate(R.id.action_registrationFragment_to_loginFragment2)
+                                }.show()
+                        }
                     }
+
                 }
 
             }
-
         }
-        
+
         lifecycleScope.launch {
             viewModel.signUpLoading.collectLatest {
                 when (it) {
@@ -103,10 +112,22 @@ class RegistrationFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.signUpError.collectLatest {
                 it?.let {
-                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                    AlertDialog.Builder(requireContext()).setTitle(getString(R.string.attention))
+                        .setCancelable(false).setMessage(it.toString())
+                        .setPositiveButton(
+                            getString(android.R.string.ok)
+                        ) { _, _ ->
+                        }.show()
                 }
             }
         }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
 
     }
 
