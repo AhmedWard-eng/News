@@ -12,9 +12,14 @@ import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.databinding.FragmentLoginBinding
 import com.example.news.domin.model.News
 import com.example.news.ui.login.LoginViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment(), OnItemNewsClicked {
     private lateinit var binding: FragmentHomeBinding
@@ -34,17 +39,34 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         (context as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
+        binding.shimmerFrameLayout.startShimmerAnimation()
         homeAdapter =
-            HomeAdapter( (context as AppCompatActivity).applicationContext, this)
+            HomeAdapter((context as AppCompatActivity).applicationContext, this)
 
         lifecycleScope.launch {
             homeViewModel.news.collect {
-                homeAdapter.setList(it)
-
+                hideRecycler()
+                delay(1000)
+               if(it.isNotEmpty()) {
+                   showRecycler()
+                   homeAdapter.setList(it)
+               }
             }
         }
-        binding.recycleNewsHome.adapter=homeAdapter
+        binding.recycleNewsHome.adapter = homeAdapter
 
+    }
+
+    fun showRecycler() {
+        binding.recycleNewsHome.visibility = View.VISIBLE
+        binding.shimmerFrameLayout.stopShimmerAnimation()
+        binding.shimmerFrameLayout.visibility = View.GONE
+    }
+    fun hideRecycler()
+    {
+        binding.recycleNewsHome.visibility = View.GONE
+        binding.shimmerFrameLayout.startShimmerAnimation()
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
     }
 
     override fun newsClicked(News: News) {

@@ -61,7 +61,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation 'com.github.bumptech.glide:glide:4.15.0'
+
     /**Ahmed*/
 
     /**Fatma*/
@@ -89,5 +89,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
     /**Yasmeen*/
 }
