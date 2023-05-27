@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalSource {
     suspend fun insertNews(localNews: LocalNews)
+
+
+    suspend fun insertNews(localNewsList: List<LocalNews>)
     fun getAllNews(): Flow<List<LocalNews>>
     suspend fun deleteNews(localNews: LocalNews)
     fun getFavNewsWithTitle(title: String): Flow<LocalNews>

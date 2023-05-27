@@ -11,6 +11,10 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        newsDAO.insertNews(localNews)
     }
 
+    override suspend fun insertNews(localNewsList: List<LocalNews>) {
+        newsDAO.insertNews(localNewsList)
+    }
+
     override fun getAllNews(): Flow<List<LocalNews>> {
       return newsDAO.getAllNews()
     }

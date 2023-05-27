@@ -16,7 +16,7 @@ data class LocalNews(
     val content: String
 )
 
-fun LocalNews.toNews(): News {
+fun LocalNews.toNews(isFav : Boolean = false): News {
     return News(
         title = title,
         author = author,
@@ -24,6 +24,7 @@ fun LocalNews.toNews(): News {
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content
+        content = content,
+        isFav =  isFav
     )
 }

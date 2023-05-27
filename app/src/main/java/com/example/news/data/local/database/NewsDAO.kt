@@ -11,6 +11,10 @@ interface NewsDAO {
     suspend fun insertNews(localNews: LocalNews)
     @Query("Select * from Articles")
     fun getAllNews(): Flow<List<LocalNews>>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNews(localNewsList: List<LocalNews>)
     @Delete
     suspend fun deleteNews(localNews: LocalNews)
 
