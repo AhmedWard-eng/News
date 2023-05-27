@@ -15,8 +15,21 @@
     <string name="email_regist">Email</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="password_regist">Password</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">title</string>
+    <string name="search">Search</string>
+    <string name="favourites">Favourites</string>
+    /***Nada***/
+
+    /***Ward***/
+
+    <string name="internet_connection_is_restored">Internet Connection is restored</string>
+    <string name="internet_connection_is_lost">Internet Connection is lost</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    /***Nada***/
+    <string name="are_you_sure_that_you_want_to_delete_that_news_from_favorites">Are you sure that you want to delete that News from favorites</string>
+    <string name="warning">Warning</string>
+
+    /***Ward***/
 
 </resources>

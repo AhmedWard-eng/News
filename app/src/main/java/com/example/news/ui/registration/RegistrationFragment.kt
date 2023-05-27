@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.example.news.R
 import com.example.news.data.repo.auth.AuthRepo
 import com.example.news.data.repo.auth.AuthRepoImp
@@ -66,16 +66,29 @@ class RegistrationFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.signUpLoading.collectLatest {
-                Log.i("TAG", "Loading")
-            }
             viewModel.signUpSuccess.collectLatest {
-                Log.i("TAG", "Success")
-                Toast.makeText(context, "Registration successfully", Toast.LENGTH_SHORT).show()
+                when(it){
+                    false->{
+
+                    }else -> {
+                        Toast.makeText(context, "Registration successfully", Toast.LENGTH_SHORT).show()
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.action_registrationFragment_to_loginFragment2)
+                    }
+                }
+
             }
+
+        }
+        
+        lifecycleScope.launch {
+            viewModel.signUpLoading.collectLatest {
+            }
+        }
+
+        lifecycleScope.launch {
             viewModel.signUpError.collectLatest {
-                Log.i("TAG", "Error")
-                Toast.makeText(context, "Error, failed to register", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
 
