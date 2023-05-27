@@ -37,7 +37,7 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
 
     object DiffUtils : DiffUtil.ItemCallback<News>() {
         override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem === newItem
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
