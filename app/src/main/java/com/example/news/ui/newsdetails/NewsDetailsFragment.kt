@@ -38,7 +38,7 @@ class NewsDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val news: News = args.currentNew
+        val news: News = args.currentNews
 
         binding.titleTextView.text = news.title
         binding.authorTextView.text = news.author
