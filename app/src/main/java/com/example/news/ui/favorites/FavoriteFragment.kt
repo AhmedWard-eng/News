@@ -46,14 +46,7 @@ class FavoriteFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val filteredList = filteredMyListWithSequence(s.toString())
-                if (filteredList.isNullOrEmpty()) {
-                    binding.groupNoMatchingResult.visibility = VISIBLE
-                    binding.recyclerView.visibility = GONE
-                } else {
-
-                    binding.groupNoMatchingResult.visibility = GONE
-                    binding.recyclerView.visibility = VISIBLE
-                }
+                showNoMatchingResultIfFilteredListIsEmpty(filteredList)
                 favAdapter.submitList(filteredList)
             }
 
@@ -81,6 +74,17 @@ class FavoriteFragment : Fragment() {
                     favAdapter.submitList(it)
                 }
             }
+        }
+    }
+
+    private fun showNoMatchingResultIfFilteredListIsEmpty(filteredList: List<News>?) {
+        if (filteredList.isNullOrEmpty()) {
+            binding.groupNoMatchingResult.visibility = VISIBLE
+            binding.recyclerView.visibility = GONE
+        } else {
+
+            binding.groupNoMatchingResult.visibility = GONE
+            binding.recyclerView.visibility = VISIBLE
         }
     }
 
