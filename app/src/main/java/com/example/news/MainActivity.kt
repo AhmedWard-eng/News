@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: MainActivityNewsModel
 
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,12 +29,13 @@ class MainActivity : AppCompatActivity() {
                 viewModel.networkStatFlow.collect {
                     when (it) {
                         NetworkStatus.CONNECTED -> {
-                            showSnackBar(binding.root,it.stringId)
+                            showSnackBar(binding.root, it.stringId)
                         }
 
                         NetworkStatus.DISCONNECTED -> {
-                            showSnackBar(binding.root,it.stringId)
+                            showSnackBar(binding.root, it.stringId)
                         }
+
                         else -> {
 
                         }
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showSnackBar(view: View, stringId: Int){
+    private fun showSnackBar(view: View, stringId: Int) {
         val snackBar = Snackbar.make(
             view, getString(stringId), Snackbar.LENGTH_LONG
         )

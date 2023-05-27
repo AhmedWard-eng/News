@@ -9,36 +9,35 @@ import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class MainActivityNewsModel(val app : Application) : AndroidViewModel(app) {
+class MainActivityNewsModel(val app: Application) : AndroidViewModel(app) {
 
     private val _networkStateFlow = MutableStateFlow(NetworkStatus.NAN)
     val networkStatFlow = _networkStateFlow.asStateFlow()
 
-    private val networkRequest = NetworkRequest.Builder()
-        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-        .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
-        .build()
+    private val networkRequest =
+        NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR).build()
 
 
     fun checkInternetConnection() {
-        val connectivityManager = app.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        val connectivityManager =
+            app.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         connectivityManager.requestNetwork(networkRequest, networkCallBack())
     }
 
-    private fun networkCallBack() : ConnectivityManager.NetworkCallback{
+    private fun networkCallBack(): ConnectivityManager.NetworkCallback {
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             // network is available for use
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                if(networkStatFlow.value == NetworkStatus.DISCONNECTED)
-                    _networkStateFlow.value = NetworkStatus.CONNECTED
+                if (networkStatFlow.value == NetworkStatus.DISCONNECTED) _networkStateFlow.value =
+                    NetworkStatus.CONNECTED
             }
 
             // Network capabilities have changed for the network
             override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities
+                network: Network, networkCapabilities: NetworkCapabilities
             ) {
                 super.onCapabilitiesChanged(network, networkCapabilities)
 //                val unmetered = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
@@ -55,7 +54,7 @@ class MainActivityNewsModel(val app : Application) : AndroidViewModel(app) {
 
 }
 
-enum class NetworkStatus(val stringId : Int){
+enum class NetworkStatus(val stringId: Int) {
     CONNECTED(stringId = R.string.internet_connection_is_restored),
     DISCONNECTED(stringId = R.string.internet_connection_is_lost),
     NAN(0)
