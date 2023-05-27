@@ -59,6 +59,11 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
                 // This method is called after the text has been changed.
             }
         }
+
+        binding.floatingActionButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_logoutFragment)
+
+        }
         binding.searchEdit.addTextChangedListener(textWatcher)
         lifecycleScope.launch {
             homeViewModel.news.collect {
@@ -106,4 +111,5 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         val action = HomeFragmentDirections.actionHomeFragmentToNewsDetailsFragment6(News)
         binding.root.findNavController().navigate(action)
     }
+
 }

@@ -1,80 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".ui.home.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txt_search"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/search_bg"
-        android:hint="@string/search"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/primary_color"
-        app:hintTextColor="@color/primary_color"
-        app:startIconDrawable="@drawable/search">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_bg"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerFrameLayout"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".ui.home.HomeFragment">
 
-        <!-- Adding 15 rows of placeholders -->
-        <LinearLayout
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_search"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/search_bg"
+            android:hint="@string/search"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/primary_color"
+            app:hintTextColor="@color/primary_color"
+            app:startIconDrawable="@drawable/search">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bg"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-            <include layout="@layout/home_shimmer_placeholder" />
-   </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_news_home"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/news_list_row" />
+            <!-- Adding 15 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_noMatching"
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+                <include layout="@layout/home_shimmer_placeholder" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_news_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/news_list_row" />
+
+        <TextView
+            android:id="@+id/txt_noMatching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/no_matching_results"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/no_matching_results"
+        android:clickable="true"
+        android:src="@drawable/baseline_person_24"
+        app:backgroundTint="@color/primary_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+       />
+</androidx.constraintlayout.widget.ConstraintLayout>
