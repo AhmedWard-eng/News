@@ -20,4 +20,11 @@
     <string name="favourites">Favourites</string>
     /***Nada***/
 
+    /***Ward***/
+
+    <string name="internet_connection_is_restored">Internet Connection is restored</string>
+    <string name="internet_connection_is_lost">Internet Connection is lost</string>
+
+    /***Ward***/
+
 </resources>
