@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val newsRepo: NewsRepo = NewsRepoImp()) : ViewModel() {
     init {
-        println("in viewModel///////////////////////////////////////////")
         viewModelScope.launch { newsRepo.refreshNews()
         }
     }
