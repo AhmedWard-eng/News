@@ -28,6 +28,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="are_you_sure_that_you_want_to_delete_that_news_from_favorites">Are you sure that you want to delete that News from favorites</string>
     <string name="warning">Warning</string>
+    <string name="no_matching_results">No Matching Results</string>
 
     /***Ward***/
 
