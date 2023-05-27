@@ -19,8 +19,10 @@ class MainActivityNewsModel(val app: Application) : AndroidViewModel(app) {
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR).build()
 
-
-    fun checkInternetConnection() {
+    init {
+        checkInternetConnection()
+    }
+    private fun checkInternetConnection() {
         val connectivityManager =
             app.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         connectivityManager.requestNetwork(networkRequest, networkCallBack())

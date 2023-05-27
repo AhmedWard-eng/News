@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainActivityNewsModel::class.java]
-        viewModel.checkInternetConnection()
 
 
         lifecycleScope.launch {
