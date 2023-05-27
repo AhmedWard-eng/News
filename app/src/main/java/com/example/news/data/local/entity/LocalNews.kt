@@ -6,17 +6,17 @@ import com.example.news.domin.model.News
 
 @Entity(tableName = "Articles")
 data class LocalNews(
-    val author: String,
+    val author: String = "",
     @PrimaryKey
-    val title: String,
-    val description: String,
-    val url: String,
-    val urlToImage: String,
-    val publishedAt: String,
-    val content: String
+    val title: String = "",
+    val description: String="",
+    val url: String="",
+    val urlToImage: String="",
+    val publishedAt: String="",
+    val content: String =""
 )
 
-fun LocalNews.toNews(): News {
+fun LocalNews.toNews(isFav : Boolean = false): News {
     return News(
         title = title,
         author = author,
@@ -24,6 +24,7 @@ fun LocalNews.toNews(): News {
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content
+        content = content,
+        isFav =  isFav
     )
 }

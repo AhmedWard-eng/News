@@ -11,6 +11,10 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        newsDAO.insertNews(localNews)
     }
 
+    override suspend fun insertNews(localNewsList: List<LocalNews>) {
+        newsDAO.insertNews(localNewsList)
+    }
+
     override fun getAllNews(): Flow<List<LocalNews>> {
       return newsDAO.getAllNews()
     }
@@ -19,7 +23,7 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        newsDAO.deleteNews(localNews)
     }
 
-    override fun getFavNewsWithTitle(title: String): Flow<LocalNews> {
+    override fun getFavNewsWithTitle(title: String): Flow<FavNews> {
        return  newsDAO.getFavNewsWithTitle(title)
     }
 
@@ -31,7 +35,7 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        return newsDAO.getAllFavNews()
     }
 
-    override suspend fun deleteFavNews(favNews: FavNews) {
-        newsDAO.deleteFavNews(favNews)
+    override suspend fun deleteFavNews(title: String) {
+        newsDAO.deleteFavNews(title = title)
     }
 }
