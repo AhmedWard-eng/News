@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.news.ui.splash.SplashFragment"
