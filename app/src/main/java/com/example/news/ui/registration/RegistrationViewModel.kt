@@ -45,7 +45,7 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
             }else{
                 response.onFailure {
                     signUpMutableError.value = it.message ?: ""
-                    Log.i("eeeeeeeeeeeeee",it.message ?: "")
+                   
                 }
             }
         }
