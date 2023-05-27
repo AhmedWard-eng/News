@@ -10,7 +10,7 @@ private const val NewsKey = BuildConfig.API_NewsKey
 interface RetrofitNewsService {
     @GET("top-headlines")
     suspend fun getAllNews(
-        @Query("country") country: String,
+        @Query("country") country: String = "us",
         @Query("apiKey") apiKey: String = NewsKey
     ): NewsResponse
 }

@@ -1,6 +1,6 @@
 package com.example.news.data.remote.entity.news
 
-data class Article(
+data class RemoteNews(
     val source: Source,
     val author: String?,
     val title: String,

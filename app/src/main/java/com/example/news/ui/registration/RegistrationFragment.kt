@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.news.R
+import com.example.news.data.remote.datasource.news.NewsRemoteDataImp
 import com.example.news.data.repo.auth.AuthRepo
 import com.example.news.data.repo.auth.AuthRepoImp
 
@@ -39,7 +40,7 @@ class RegistrationFragment : Fragment() {
 
         val authRepo: AuthRepo = AuthRepoImp()
 
-        val viewModel : RegistrationViewModel by viewModels {
+        val viewModel: RegistrationViewModel by viewModels {
             RegistViewModelFactory(authRepo)
         }
 
@@ -48,20 +49,24 @@ class RegistrationFragment : Fragment() {
             val userName = binding.userNameTextField.text
             val password = binding.passwordTextField.text
 
-            if(!viewModel.validateUserName(userName = userName.toString())){
+            if (!viewModel.validateUserName(userName = userName.toString())) {
                 binding.userNameTextField.error = viewModel.signUpUserName.value
             }
-            if(!viewModel.validateEmail(email = email.toString())){
+            if (!viewModel.validateEmail(email = email.toString())) {
                 binding.emailTextField.error = viewModel.signUpEmail.value
             }
-            if(!viewModel.validatePassword(password= password.toString())){
+            if (!viewModel.validatePassword(password = password.toString())) {
                 binding.passwordTextField.error = viewModel.signUpPassword.value
             }
 
-            if (viewModel.validateEmail(email.toString()) && viewModel.validatePassword(password.toString()) && viewModel.validateUserName(userName.toString())) {
+            if (viewModel.validateEmail(email.toString()) && viewModel.validatePassword(password.toString()) && viewModel.validateUserName(
+                    userName.toString()
+                )
+            ) {
                 viewModel.postSignUp(email.toString(), userName.toString(), password.toString())
-            }else{
-                Toast.makeText(context, "Invalid Registration, try again", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Invalid Registration, try again", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -78,7 +83,6 @@ class RegistrationFragment : Fragment() {
                 Toast.makeText(context, "Error, failed to register", Toast.LENGTH_SHORT).show()
             }
         }
-
 
     }
 

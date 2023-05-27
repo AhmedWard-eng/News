@@ -10,5 +10,5 @@ object RetrofitNewsApi {
     private val retrofit: Retrofit = Retrofit.Builder().baseUrl(newsUrl)
         .addConverterFactory(GsonConverterFactory.create()).build()
 
-    val apiService = retrofit.create(RetrofitNewsApi::class.java)
+    val apiService = retrofit.create(RetrofitNewsService::class.java)
 }
