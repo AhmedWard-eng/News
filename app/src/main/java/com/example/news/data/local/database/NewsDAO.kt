@@ -24,6 +24,6 @@ interface NewsDAO {
     suspend fun insertFavNews(favNews: FavNews)
     @Query("Select * from Articles")
     fun getAllFavNews(): Flow<List<FavNews>>
-    @Delete
-    suspend fun deleteFavNews(favNews: FavNews)
+    @Query("Delete from FavoriteArticles where title = :title")
+    suspend fun deleteFavNews(title: String)
 }

@@ -6,9 +6,9 @@ import com.example.news.domin.model.News
 data class RemoteNews(val title: String)
 
 fun RemoteNews.toNews(): News {
-    return News("", title, "", "", "", "", "")
+    return News(title=  title)
 }
 
 fun RemoteNews.toLocalNews(): LocalNews {
-    return LocalNews("", title, "", "", "", "", "")
+    return LocalNews(title = title)
 }

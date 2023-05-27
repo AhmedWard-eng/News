@@ -35,7 +35,7 @@ class NewsLocalSource(private val newsDAO: NewsDAO =NewsDatabase.getInstance().g
        return newsDAO.getAllFavNews()
     }
 
-    override suspend fun deleteFavNews(favNews: FavNews) {
-        newsDAO.deleteFavNews(favNews)
+    override suspend fun deleteFavNews(title: String) {
+        newsDAO.deleteFavNews(title = title)
     }
 }

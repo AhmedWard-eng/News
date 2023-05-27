@@ -11,7 +11,6 @@ import com.example.news.domin.model.News
 import com.example.news.domin.model.toLocalNews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 
 class NewsRepoImp(
@@ -22,15 +21,14 @@ class NewsRepoImp(
 
     override suspend fun refreshNews() {
         try {
-            newLocalSource.insertNews(newsRemoteData.getNews().map { it.toLocalNews() })
-
+            val remoteNews = newsRemoteData.getNews()
+            newLocalSource.insertNews(remoteNews.map { it.toLocalNews() })
         } catch (e: Exception) {
             Log.e("Network Error", "refreshNews: ${e.message} ")
         }
     }
 
     override fun getNews(): Flow<List<News>> {
-
         return newLocalSource.getAllNews().map { localNewsList ->
             localNewsList.map {
                 it.toNews()
@@ -44,7 +42,6 @@ class NewsRepoImp(
                 news.first { newsItem -> newsItem.title == it.title }.toNews(true)
             }
         }
-
     }
 
     override suspend fun addToFavorites(news: News): Result<Boolean> {
@@ -53,8 +50,7 @@ class NewsRepoImp(
     }
 
     override suspend fun removeFromFavorites(news: News): Result<Boolean> {
-        newLocalSource.deleteFavNews(FavNews(news.title))
-
+        newLocalSource.deleteFavNews(news.title)
         return Result.success(true)
     }
 
