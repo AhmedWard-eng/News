@@ -31,7 +31,7 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
             true
         }
         holder.binding.txtTitleHome.text = item.title
-        holder.binding.imageResultItemMeal.setImageUsingGlide(item.urlToImage)
+        holder.binding.imageNewsHome.setImageUsingGlide(item.urlToImage)
 
 
 

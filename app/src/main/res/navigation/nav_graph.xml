@@ -26,9 +26,9 @@
         android:name="com.example.news.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_newsDetailsFragment"
-            app:destination="@id/newsDetailsFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_newsDetailsFragment"-->
+<!--            app:destination="@id/newsDetailsFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -52,6 +52,7 @@
         <argument
             android:name="currentNew"
             app:argType="com.example.news.domin.model.News" />
+      </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.news.ui.registration.RegistrationFragment"
