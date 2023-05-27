@@ -1,7 +1,7 @@
 package com.example.news.ui.login
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.news.R
 import com.example.news.databinding.FragmentLoginBinding
-import com.example.news.ui.splash.Destination
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -27,6 +24,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,18 +47,17 @@ class LoginFragment : Fragment() {
             }
         }
 
-
         lifecycleScope.launch {
             loginViewModel.loginResponse.collect{
                 when (it) {
                     false -> {
-                        Toast.makeText(
-                            context,
-                            loginViewModel.error,
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        AlertDialog.Builder(requireContext()).setTitle(getString(R.string.attention))
+                            .setCancelable(false).setMessage(loginViewModel.error)
+                            .setPositiveButton(
+                                getString(android.R.string.ok)
+                            ) { _, _ ->
 
+                            }.show()
                     }
                     true -> {
                         Toast.makeText(
@@ -70,7 +67,6 @@ class LoginFragment : Fragment() {
                         )
                             .show()
                         Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
-
                     }
                     else -> {
 

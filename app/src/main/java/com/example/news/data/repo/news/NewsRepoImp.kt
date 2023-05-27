@@ -22,7 +22,8 @@ class NewsRepoImp(
     override suspend fun refreshNews() {
         try {
             val remoteNews = newsRemoteData.getNews()
-            newLocalSource.insertNews(remoteNews.map { it.toLocalNews() })
+            val localNews = remoteNews.map { it.toLocalNews() }
+            newLocalSource.insertNews(localNews)
         } catch (e: Exception) {
             Log.e("Network Error", "refreshNews: ${e.message} ")
         }

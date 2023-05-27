@@ -41,8 +41,8 @@ class AuthRepoImp(
         }
     }
 
-    override suspend fun logout(): Boolean {
-        TODO()
+    override suspend fun logout() {
+       userManager.removeUserData()
     }
 
     override suspend fun saveLoggedInData(localUser: LocalUser) {

@@ -32,6 +32,7 @@ class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel
                 }
                 _loginResponse.value = false
             }
+            _loginResponse.value = null
 
         }
     }

@@ -6,6 +6,7 @@
     <string name="password">Password</string>
     <string name="don_t_have_account">Don\'t have account?</string>
     <string name="signup">signUp</string>
+    <string name="home">Home</string>
     /***Yasmeen***/
     <!-- TODO: Remove or change this placeholder text -->
 
@@ -15,6 +16,7 @@
     <string name="email_regist">Email</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="password_regist">Password</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">title</string>
     <string name="search">Search</string>
     <string name="favourites">Favourites</string>
@@ -31,5 +33,16 @@
     <string name="no_matching_results">No Matching Results</string>
 
     /***Ward***/
+
+    /***Fatma***/
+
+    <string name="logout">Logout</string>
+    <string name="sure_logout">Are you sure that you want to logout</string>
+    <string name="attention">Attention</string>
+    <string name= "Login_Successfully" >Login Successfully</string>
+    <string name= "Registration_successfully" >Registration successfully</string>
+    <string name="Invalid_Registration">Invalid Registration, try again</string>
+
+    /***Fatma**/
 
 </resources>
