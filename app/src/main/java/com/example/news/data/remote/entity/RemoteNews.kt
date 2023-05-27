@@ -6,9 +6,21 @@ import com.example.news.domin.model.News
 
 
 fun RemoteNews.toNews(): News {
-    return News(title=  title)
+    return News( title = title?:"",
+        author = author?:"",
+        description = description?:"",
+        url = url?:"",
+        urlToImage = urlToImage?:"",
+        publishedAt = publishedAt?:"",
+        content = content?:"")
 }
 
 fun RemoteNews.toLocalNews(): LocalNews {
-    return LocalNews(title = title)
+    return LocalNews(title = title?:"",
+        author = author?:"",
+        description = description?:"",
+        url = url?:"",
+        urlToImage = urlToImage?:"",
+        publishedAt = publishedAt?:"",
+        content = content?:"")
 }
