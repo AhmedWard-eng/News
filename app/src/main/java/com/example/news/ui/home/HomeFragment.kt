@@ -1,6 +1,8 @@
 package com.example.news.ui.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +15,11 @@ import com.example.news.databinding.FragmentLoginBinding
 import com.example.news.domin.model.News
 import com.example.news.ui.login.LoginViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment(), OnItemNewsClicked {
     private lateinit var binding: FragmentHomeBinding
@@ -42,11 +42,30 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         binding.shimmerFrameLayout.startShimmerAnimation()
         homeAdapter =
             HomeAdapter((context as AppCompatActivity).applicationContext, this)
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // This method is called before the text is changed.
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val filteredList = filteredMyListWithSequence(s.toString())
+                showNoMatchingResultIfFilteredListIsEmpty(filteredList)
+                if (filteredList != null) {
+                    homeAdapter.setList(filteredList)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // This method is called after the text has been changed.
+            }
+        }
+        binding.searchEdit.addTextChangedListener(textWatcher)
         lifecycleScope.launch {
             homeViewModel.news.collect {
+                homeViewModel.list=it
                 hideRecycler()
                 delay(1000)
+
                if(it.isNotEmpty()) {
                    showRecycler()
                    homeAdapter.setList(it)
@@ -68,7 +87,20 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         binding.shimmerFrameLayout.startShimmerAnimation()
         binding.shimmerFrameLayout.visibility = View.VISIBLE
     }
+    private fun filteredMyListWithSequence(s: String): List<News>? {
 
+        return homeViewModel.list?.filter { it.title.lowercase().contains(s.lowercase()) }
+    }
+    private fun showNoMatchingResultIfFilteredListIsEmpty(filteredList: List<News>?) {
+        if (filteredList.isNullOrEmpty()) {
+            binding.txtNoMatching.visibility = View.VISIBLE
+            binding.recycleNewsHome.visibility = View.GONE
+        } else {
+
+            binding.txtNoMatching.visibility = View.GONE
+            binding.recycleNewsHome.visibility = View.VISIBLE
+        }
+    }
     override fun newsClicked(News: News) {
 
     }
