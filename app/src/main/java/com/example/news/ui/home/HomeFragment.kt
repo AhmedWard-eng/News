@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.domin.model.News
@@ -102,6 +103,7 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         }
     }
     override fun newsClicked(News: News) {
-
+        val action = HomeFragmentDirections.actionHomeFragmentToNewsDetailsFragment6(News)
+        binding.root.findNavController().navigate(action)
     }
 }

@@ -46,7 +46,7 @@ class NewsDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        var news = args.currentNew
+        var news = args.currentNews
 
 
         binding.titleTextView.text = news.title
