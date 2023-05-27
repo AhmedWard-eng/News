@@ -14,6 +14,7 @@ import com.example.news.R
 import com.example.news.databinding.FragmentLoginBinding
 import com.example.news.ui.splash.Destination
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -32,36 +33,25 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val email = binding.emailInputLogin.text.toString()
-        val password = binding.passwordInputLogin.text.toString()
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        binding.progressBar.visibility = View.GONE
+
         lifecycleScope.launch {
             loginViewModel.loading.collect {
                 when (it) {
                     true -> {
-                        Toast.makeText(
-                            context,
-                            "Loading",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                        binding.progressBar.visibility = View.VISIBLE                    }
                     else -> {
-                        Toast.makeText(
-                            context,
-                            "Loading is Stopped",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }
-
-
         }
+
+
         lifecycleScope.launch {
-            loginViewModel.loginResponse.collect {
-                Log.i("wwwwwwwwwwwwww",it.toString())
+            loginViewModel.loginResponse.collect{
                 when (it) {
                     false -> {
                         Toast.makeText(
@@ -71,22 +61,27 @@ class LoginFragment : Fragment() {
                         )
                             .show()
 
-                        Log.i("ttttttttttttt",loginViewModel.error)
-
                     }
                     true -> {
-
                         Toast.makeText(
                             context,
                             "Login Successfully",
                             Toast.LENGTH_LONG
                         )
                             .show()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
+
+                    }
+                    else -> {
+
                     }
                 }
             }
         }
+
         binding.btnLogin.setOnClickListener {
+            val email = binding.emailInputLogin.text.toString()
+            val password = binding.passwordInputLogin.text.toString()
             loginViewModel.login(email, password)
         }
 

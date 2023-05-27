@@ -32,9 +32,8 @@ class AuthRemoteDataSourceImp(
     }
 
     override suspend fun signUP(authRequest: SignupRequest): SignupResponse {
-        val response = retrofitService.signUp(authRequest)
-
         return try {
+            val response = retrofitService.signUp(authRequest)
             response
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()

@@ -44,7 +44,8 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
                 signUpMutableSuccess.value = true
             }else{
                 response.onFailure {
-                    signUpMutableError.value = it.message
+                    signUpMutableError.value = it.message ?: ""
+                    Log.i("eeeeeeeeeeeeee",it.message ?: "")
                 }
             }
         }
@@ -67,7 +68,7 @@ class RegistrationViewModel (private val repo: AuthRepo) : ViewModel(){
     }
 
     fun validatePassword(password : String): Boolean {
-        if (password.isEmpty() && password.length >= 6) {
+        if (password.isEmpty() || password.length <= 6) {
             signUpPassword.value = "Invalid Password"
             return false
         }

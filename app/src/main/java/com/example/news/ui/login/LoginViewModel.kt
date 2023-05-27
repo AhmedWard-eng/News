@@ -12,27 +12,25 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val authRepo: AuthRepo = AuthRepoImp()) : ViewModel() {
-    private val _loginResponse = MutableStateFlow<Boolean>(false)
-    val loginResponse: StateFlow<Boolean> = _loginResponse
+    private val _loginResponse = MutableStateFlow<Boolean?>(null)
+    val loginResponse: StateFlow<Boolean?> = _loginResponse
     private val _loading = MutableStateFlow<Boolean>(false)
     val loading = _loading
     var error: String = ""
         private set
 
     fun login(email: String, password: String) {
-
         viewModelScope.launch {
             loading.value = true
             val result = authRepo.login(email, password)
             loading.value = false
-            if (result.isSuccess)
+            if (result.isSuccess){
                 _loginResponse.value = true
-            else {
-                _loginResponse.value = false
+            }else {
                 result.onFailure {
                     error = it.message ?: ""
-                    Log.i("yyyyyyyyyyyyy",it.message ?: "")
                 }
+                _loginResponse.value = false
             }
 
         }
