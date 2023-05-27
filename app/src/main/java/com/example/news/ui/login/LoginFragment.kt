@@ -1,5 +1,6 @@
 package com.example.news.ui.login
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -46,18 +47,17 @@ class LoginFragment : Fragment() {
             }
         }
 
-
         lifecycleScope.launch {
             loginViewModel.loginResponse.collect{
                 when (it) {
                     false -> {
-                        Toast.makeText(
-                            context,
-                            loginViewModel.error,
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        AlertDialog.Builder(requireContext()).setTitle(getString(R.string.attention))
+                            .setCancelable(false).setMessage(loginViewModel.error)
+                            .setPositiveButton(
+                                getString(android.R.string.ok)
+                            ) { _, _ ->
 
+                            }.show()
                     }
                     true -> {
                         Toast.makeText(
@@ -67,7 +67,6 @@ class LoginFragment : Fragment() {
                         )
                             .show()
                         Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
-
                     }
                     else -> {
 
