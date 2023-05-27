@@ -87,7 +87,7 @@ class RegistrationFragment : Fragment() {
             }
 
         }
-
+        
         lifecycleScope.launch {
             viewModel.signUpLoading.collectLatest {
                 when (it) {
@@ -105,6 +105,7 @@ class RegistrationFragment : Fragment() {
                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
 }
