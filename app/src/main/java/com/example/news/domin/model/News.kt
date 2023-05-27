@@ -1,8 +1,11 @@
 package com.example.news.domin.model
 
+import android.os.Parcelable
 import com.example.news.data.local.entity.LocalNews
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 data class News(
     val author: String = "",
     val title: String = "",
@@ -12,7 +15,7 @@ data class News(
     val publishedAt: String = "",
     val content: String = "",
     val isFav : Boolean = false
-)
+): Parcelable
 
 fun News.toLocalNews(): LocalNews {
     return LocalNews(
