@@ -10,6 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.news.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -66,8 +68,7 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
         if (id == R.id.favouriteItem) {
-            Toast.makeText(this, "Favorite Clicked", Toast.LENGTH_LONG).show()
-
+            findNavController(R.id.navigation_graph).navigate(R.id.favoriteFragment)
         }
         return super.onOptionsItemSelected(item)
     }

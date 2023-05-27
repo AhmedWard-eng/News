@@ -64,7 +64,7 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
     }
 }
 
-fun CircleImageView.setImageUsingGlide(url: String){
+fun ImageView.setImageUsingGlide(url: String){
     Glide.with(context.applicationContext)
         .load(url)
         .placeholder(R.drawable.image_not_found)

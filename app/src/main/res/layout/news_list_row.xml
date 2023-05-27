@@ -8,19 +8,19 @@
     android:layout_margin="8dp"
     android:elevation="16dp"
     app:cardCornerRadius="24dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/image_news_home"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,26 +28,38 @@
             android:id="@+id/txt_title_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="16dp"
             android:text="@string/title"
+            android:textColor="#00008b"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_news_home" />
+
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:background="#55AAAAAA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/image_news_home"
             app:layout_constraintTop_toBottomOf="@+id/image_news_home" />
 
         <ImageView
             android:id="@+id/imageViewIsFav"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_news_home"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_news_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toEndOf="@+id/txt_title_home"
+            app:layout_constraintTop_toTopOf="@+id/view2"
             app:srcCompat="@drawable/baseline_favorite_border_24" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
