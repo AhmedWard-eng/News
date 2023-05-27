@@ -48,6 +48,7 @@ class NewsDetailsFragment : Fragment() {
 
         var news = args.currentNew
 
+
         binding.titleTextView.text = news.title
         binding.authorTextView.text = news.author
         binding.dateTextView.text = news.publishedAt

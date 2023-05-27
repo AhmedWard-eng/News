@@ -17,6 +17,7 @@ class HomeAdapter(
     private  var newsList: MutableList<News> = ArrayList()
 
     fun setList(list: List<News>) {
+        newsList.clear()
         newsList.addAll(list)
         notifyDataSetChanged()
     }

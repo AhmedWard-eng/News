@@ -12,7 +12,7 @@ class PreferencesData(private val sharedPreferences: SharedPreferences = SharedP
     UserManager {
 
 
-    private val editor = sharedPreferences?.edit()
+    private val editor = sharedPreferences.edit()
     override fun saveUserData(localUser: LocalUser) {
         editor?.putString(userId, localUser.userId)
         editor?.putString(name, localUser.userName)
@@ -24,7 +24,7 @@ class PreferencesData(private val sharedPreferences: SharedPreferences = SharedP
         val userId = sharedPreferences.getString(userId, "")
         val name = sharedPreferences.getString(name, "")
         val email = sharedPreferences.getString(email, "")
-        return if (userId.isNullOrBlank() || name.isNullOrBlank() || email.isNullOrBlank()) {
+        return if (userId.isNullOrBlank() || name == null || email == null) {
             Result.failure(Exception("User not Found"))
         } else {
             Result.success(
