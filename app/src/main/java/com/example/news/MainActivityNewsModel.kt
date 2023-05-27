@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class MainActivityNewsModel(val app : Application) : AndroidViewModel(app) {
 
-    private val _networkStateFlow = MutableStateFlow(NetworkStatus.CONNECTED)
+    private val _networkStateFlow = MutableStateFlow(NetworkStatus.NAN)
     val networkStatFlow = _networkStateFlow.asStateFlow()
 
     private val networkRequest = NetworkRequest.Builder()
@@ -31,7 +31,8 @@ class MainActivityNewsModel(val app : Application) : AndroidViewModel(app) {
             // network is available for use
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                _networkStateFlow.value = NetworkStatus.CONNECTED
+                if(networkStatFlow.value == NetworkStatus.DISCONNECTED)
+                    _networkStateFlow.value = NetworkStatus.CONNECTED
             }
 
             // Network capabilities have changed for the network
@@ -56,5 +57,6 @@ class MainActivityNewsModel(val app : Application) : AndroidViewModel(app) {
 
 enum class NetworkStatus(val stringId : Int){
     CONNECTED(stringId = R.string.internet_connection_is_restored),
-    DISCONNECTED(stringId = R.string.internet_connection_is_lost)
+    DISCONNECTED(stringId = R.string.internet_connection_is_lost),
+    NAN(0)
 }

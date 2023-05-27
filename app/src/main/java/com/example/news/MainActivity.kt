@@ -26,15 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 viewModel.networkStatFlow.collect {
                     when (it) {
                         NetworkStatus.CONNECTED -> {
-                            showSnackBar(binding.root,getString(it.stringId))
+                            showSnackBar(binding.root,it.stringId)
                         }
 
                         NetworkStatus.DISCONNECTED -> {
-                            showSnackBar(binding.root,getString(it.stringId))
+                            showSnackBar(binding.root,it.stringId)
+                        }
+                        else -> {
+
                         }
                     }
                 }
@@ -43,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showSnackBar(view: View, message: String){
+    private fun showSnackBar(view: View, stringId: Int){
         val snackBar = Snackbar.make(
-            view, message, Snackbar.LENGTH_LONG
+            view, getString(stringId), Snackbar.LENGTH_LONG
         )
         snackBar.show()
     }
