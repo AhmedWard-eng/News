@@ -13,11 +13,18 @@ import retrofit2.http.Query
 
 
 private const val KEY = BuildConfig.API_KEY
+
 interface RetrofitService {
     @POST("/v1/accounts:signUp")
-    suspend fun signUp(@Body authRequest: SignupRequest, @Query("key") key : String = KEY) : SignupResponse
+    suspend fun signUp(
+        @Body authRequest: SignupRequest,
+        @Query("key") key: String = KEY,
+    ): SignupResponse
 
     @POST("/v1/accounts:signInWithPassword")
-    suspend fun loginIn(@Body authRequestLogIn: AuthRequestLogIn, @Query("key") key: String = KEY) : RemoteUser
+    suspend fun loginIn(
+        @Body authRequestLogIn: AuthRequestLogIn,
+        @Query("key") key: String = KEY,
+    ): RemoteUser
 
 }

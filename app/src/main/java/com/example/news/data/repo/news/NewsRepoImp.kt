@@ -9,7 +9,6 @@ import com.example.news.data.remote.datasource.news.NewsRemoteData
 import com.example.news.data.remote.datasource.news.NewsRemoteDataImp
 import com.example.news.data.remote.entity.toLocalNews
 import com.example.news.domin.model.News
-import com.example.news.domin.model.toLocalNews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
