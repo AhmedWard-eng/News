@@ -8,4 +8,5 @@ interface NewsRepo {
     fun getFavorites() : Flow<List<News>>
     suspend fun addToFavorites(news: News) : Result<Boolean>
     suspend fun removeFromFavorites(news: News) : Result<Boolean>
+    suspend fun refreshNews()
 }
