@@ -55,5 +55,8 @@ class NewsRepoImp(
         return Result.success(true)
     }
 
+    override suspend fun getFavNewsWithTitle(title: String) : FavNews?{
+        return newLocalSource.getFavNewsWithTitle(title)
+    }
 
 }
