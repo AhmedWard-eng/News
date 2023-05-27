@@ -102,7 +102,9 @@ class RegistrationFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.signUpError.collectLatest {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                it?.let {
+                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
