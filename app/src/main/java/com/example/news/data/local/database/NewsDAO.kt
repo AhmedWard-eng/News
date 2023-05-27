@@ -19,7 +19,7 @@ interface NewsDAO {
     suspend fun deleteNews(localNews: LocalNews)
 
     @Query("Select * from FavoriteArticles where title = :title LIMIT 1")
-    fun getFavNewsWithTitle(title: String): Flow<FavNews>
+    fun getFavNewsWithTitle(title: String): FavNews?
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavNews(favNews: FavNews)
     @Query("Select * from FavoriteArticles")
