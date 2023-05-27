@@ -2,17 +2,14 @@ package com.example.news.ui.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.example.news.R
 import com.example.news.databinding.FragmentHomeBinding
-import com.example.news.databinding.FragmentLoginBinding
 import com.example.news.domin.model.News
-import com.example.news.ui.login.LoginViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -40,7 +37,6 @@ class HomeFragment : Fragment(), OnItemNewsClicked {
         lifecycleScope.launch {
             homeViewModel.news.collect {
                 homeAdapter.setList(it)
-
             }
         }
         binding.recycleNewsHome.adapter=homeAdapter
