@@ -1,12 +1,14 @@
 package com.example.news.ui.favorites
 
 import android.view.LayoutInflater
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.news.R
 import com.example.news.databinding.NewsListRowBinding
 import com.example.news.domin.model.News
 import de.hdodenhof.circleimageview.CircleImageView
@@ -38,7 +40,11 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
 
     }
 
-    class ViewHolder(val binding: NewsListRowBinding) :RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: NewsListRowBinding) :RecyclerView.ViewHolder(binding.root){
+        init {
+            binding.imageViewIsFav.visibility = GONE
+        }
+    }
 
 
     object DiffUtils : DiffUtil.ItemCallback<News>() {
@@ -59,7 +65,11 @@ class FavAdapter(val onClickListener: OnClickListener) : ListAdapter<News, FavAd
 }
 
 fun CircleImageView.setImageUsingGlide(url: String){
-    Glide.with(this)
+    Glide.with(context.applicationContext)
         .load(url)
+        .placeholder(R.drawable.image_not_found)
+        .error(R.drawable.images)
+        .override(200, 200)
+        .centerCrop()
         .into(this)
 }
