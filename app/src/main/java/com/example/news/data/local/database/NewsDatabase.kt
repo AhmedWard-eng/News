@@ -6,7 +6,6 @@ import com.example.news.data.local.entity.FavNews
 import com.example.news.data.local.entity.LocalNews
 
 @Database(entities = [LocalNews::class,FavNews::class], version = 1)
-@TypeConverters(TypeConverter::class)
 abstract class NewsDatabase:RoomDatabase()  {
 abstract fun getNewsDAO() : NewsDAO
     companion object {
